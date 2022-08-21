@@ -1,6 +1,17 @@
 import React from "react";
 
 export const Sort = () => {
+  const sortTypes = ["popularity", "price", "alphabet"];
+
+  const [isHiddenSort, setIsHiddenSort] = React.useState(true);
+  const [activeSort, setActiveSort] = React.useState(0);
+  const [sortTitle, setSortTitle] = React.useState(sortTypes[activeSort]);
+
+  const onClickSortType = (index) => {
+    setActiveSort(index);
+    setSortTitle(sortTypes[index]);
+  };
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -16,14 +27,22 @@ export const Sort = () => {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
-        <span>популярности</span>
+        <b>Sorted by:</b>
+        <span onClick={() => setIsHiddenSort(!isHiddenSort)}>{sortTitle}</span>
       </div>
-      <div className="sort__popup">
+      <div className={`sort__popup ${isHiddenSort ? "hidden" : ""}`}>
         <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
+          {sortTypes.map((type, index) => {
+            return (
+              <li
+                key={index}
+                className={activeSort === index ? "active" : ""}
+                onClick={() => onClickSortType(index)}
+              >
+                {type}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

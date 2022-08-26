@@ -1,6 +1,5 @@
 import React from "react";
 
-const pizzaTypes = ["subtle", "traditional"];
 export const PizzaBlock = ({
   imageUrl,
   title,
@@ -10,7 +9,9 @@ export const PizzaBlock = ({
   category,
   rating,
 }) => {
-  const [typeActive, setTypeActive] = React.useState(0);
+  const pizzaTypes = ["subtle", "traditional"];
+
+  const [typeActive, setTypeActive] = React.useState(types[0]);
   const [sizeActive, setSizeActive] = React.useState(0);
 
   return (

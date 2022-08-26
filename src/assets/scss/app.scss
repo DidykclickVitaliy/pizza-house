@@ -25,9 +25,11 @@ body {
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    // repeat(auto-fit, minmax(280px, 1fr))
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 11px;
   }
 
   &__top {
@@ -104,6 +106,10 @@ body {
         color: darken($color: #b6b6b6, $amount: 50);
       }
     }
+  }
+
+  .content__items {
+    display: block;
   }
 
   &__item {

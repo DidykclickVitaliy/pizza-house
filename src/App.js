@@ -1,28 +1,27 @@
-import { Categories } from "./components/Categories";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+// https://www.youtube.com/watch?v=7t9_nmg_Yzg&list=PL0FGkDGJQjJG9eI85xM1_iLIf6BcEdaNl&index=10  verstka
+import { Home } from "./pages/Home";
 import { Header } from "./components/Header";
-import { Sort } from "./components/Sort";
-import { PizzaBlock } from "./components/PizzaBlock";
+import { Cart } from "./pages/Cart";
+import { NotFound } from "./pages/NotFound";
 
-import pizzas from "./assets/pizzas.json";
-import "./scss/app.scss";
+// import pizzas from "./assets/pizzas.json";
+import "./assets/scss/app.scss";
 
 function App() {
+  // const pathname = window.location.pathname;
+
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
-        <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">All pizzas</h2>
-          <div className="content__items">
-            {pizzas.map((pizza) => {
-              return <PizzaBlock key={pizza.id} {...pizza} />;
-            })}
-          </div>
-        </div>
+        {/* pathname === "/" && <Home/> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );

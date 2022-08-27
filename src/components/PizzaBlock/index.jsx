@@ -1,14 +1,6 @@
 import React from "react";
 
-export const PizzaBlock = ({
-  imageUrl,
-  title,
-  types,
-  sizes,
-  price,
-  category,
-  rating,
-}) => {
+export const PizzaBlock = ({ imageUrl, title, types, sizes, price }) => {
   const pizzaTypes = ["subtle", "traditional"];
 
   const [typeActive, setTypeActive] = React.useState(types[0]);

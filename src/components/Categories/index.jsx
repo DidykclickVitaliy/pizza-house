@@ -1,7 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-export const Categories = ({ value, onChangeCategory }) => {
-  const categories = ["All", "Meaty", "Vegetarian", "Grill", "Spicy", "Closed"];
+import { setCategoryId } from "../../redux/filter/slice";
+
+const categories = ["All", "Meaty", "Vegetarian", "Grill", "Spicy", "Closed"];
+
+export const Categories = ({ value }) => {
+  const dispatch = useDispatch();
 
   return (
     <div className="categories">
@@ -11,7 +16,7 @@ export const Categories = ({ value, onChangeCategory }) => {
             <li
               key={index}
               className={value === index ? "active" : ""}
-              onClick={() => onChangeCategory(index)}
+              onClick={() => dispatch(setCategoryId(index))}
             >
               {category}
             </li>

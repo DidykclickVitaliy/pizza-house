@@ -1,19 +1,23 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-export const Sort = ({ value, onChangeSortType }) => {
-  const sortTypes = [
-    { name: "popularity (DESC)", sortProperty: "rating" },
-    { name: "popularity (ASC) ", sortProperty: "-rating" },
-    { name: "price (DESC)", sortProperty: "price" },
-    { name: "price (ASC) ", sortProperty: "-price" },
-    { name: "alphabet (DESC)", sortProperty: "title" },
-    { name: "alphabet (ASC) ", sortProperty: "-title" },
-  ];
+import { setSort } from "../../redux/filter/slice";
 
+const sortTypes = [
+  { name: "popularity (DESC)", sortProperty: "rating" },
+  { name: "popularity (ASC) ", sortProperty: "-rating" },
+  { name: "price (DESC)", sortProperty: "price" },
+  { name: "price (ASC) ", sortProperty: "-price" },
+  { name: "alphabet (DESC)", sortProperty: "title" },
+  { name: "alphabet (ASC) ", sortProperty: "-title" },
+];
+
+export const Sort = ({ value }) => {
+  const dispatch = useDispatch();
   const [isVisible, setIsVisible] = React.useState(false);
 
   const onClickSortType = (obj) => {
-    onChangeSortType(obj);
+    dispatch(setSort(obj));
     setIsVisible(false);
   };
 
@@ -44,7 +48,9 @@ export const Sort = ({ value, onChangeSortType }) => {
             return (
               <li
                 key={index}
-                className={value.name === obj.name ? "active" : ""}
+                className={
+                  value.sortProperty === obj.sortProperty ? "active" : ""
+                }
                 onClick={() => onClickSortType(obj)}
               >
                 {obj.name}

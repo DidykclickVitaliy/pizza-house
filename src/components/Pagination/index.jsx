@@ -15,7 +15,7 @@ export const Pagination = ({ currentPage }) => {
       onPageChange={(event) => dispatch(setCurrentPage(event.selected + 1))}
       pageRangeDisplayed={4}
       pageCount={3}
-      // forcePage={currentPage - 1} by deffaut index 0 propably
+      forcePage={currentPage - 1}
       previousLabel="<"
       renderOnZeroPageCount={null}
     />

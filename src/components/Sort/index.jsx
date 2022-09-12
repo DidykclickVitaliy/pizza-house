@@ -14,7 +14,23 @@ export const sortTypes = [
 
 export const Sort = ({ value }) => {
   const dispatch = useDispatch();
+
   const [isVisible, setIsVisible] = React.useState(false);
+  const sortRef = React.useRef();
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.path.includes(sortRef.current)) {
+        setIsVisible(false);
+      }
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   const onClickSortType = (obj) => {
     dispatch(setSort(obj));
@@ -22,7 +38,7 @@ export const Sort = ({ value }) => {
   };
 
   return (
-    <div className="sort">
+    <div className="sort" ref={sortRef}>
       <div className="sort__label">
         {
           <svg

@@ -12,15 +12,14 @@ import { Pagination } from "../components/Pagination";
 import { setFilters } from "../redux/filter/slice";
 
 export const Home = () => {
-  // create a commit SROCHNA  debounce, usecallback useref
   const { categoryId, sort, currentPage, searchValue } = useSelector(
     (state) => state.filter
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const isSearchRef = React.useRef(false);
   const isMountedRef = React.useRef(false);
-
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   // const [currentPage, setCurrentPage] = React.useState(1);
@@ -29,26 +28,6 @@ export const Home = () => {
   //   sortProperty: "rating",
   // });
   //do to click on svg and change desc asc 9 lesson comms
-
-  // Если был первый рендер, то проверяем УРЛ-параметры и сохраняем в редаксе
-  React.useEffect(() => {
-    if (window.location.search) {
-      const param = qs.parse(window.location.search.substring(1));
-
-      const sort = sortTypes.find(
-        (obj) => obj.sortProperty === param.sortProperty
-      );
-
-      dispatch(
-        setFilters({
-          ...param,
-          sort,
-        })
-      );
-
-      isSearchRef.current = true;
-    }
-  }, []);
 
   // Если изменили параметры и был первый рендер
   React.useEffect(() => {
@@ -67,6 +46,32 @@ export const Home = () => {
 
     isMountedRef.current = true;
   }, [categoryId, sort.sortProperty, currentPage]);
+
+  // Если был первый рендер, то проверяем УРЛ-параметры и сохраняем в редаксе
+  React.useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      const sort = sortTypes.find(
+        (obj) => obj.sortProperty === params.sortProperty
+      );
+
+      if (sort) {
+        params.sort = sort;
+      }
+
+      dispatch(setFilters(params));
+
+      // dispatch(
+      //   setFilters({
+      //     ...params,
+      //     sort,
+      //   })
+      // );
+
+      isSearchRef.current = true;
+    }
+  }, []);
 
   // Если был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {
@@ -109,7 +114,7 @@ export const Home = () => {
   // };
   // for static data, like a 50 countries in 1 array
 
-  const skeleton = [...new Array(8)].map((_, index) => (
+  const skeleton = [...new Array(4)].map((_, index) => (
     <Skeleton key={index} />
   ));
 

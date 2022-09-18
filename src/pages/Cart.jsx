@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 import { CartItem } from "../components/CartItem";
 import { CartEmpty } from "../components/CartEmpty";
-import { removeAllItems } from "../redux/cart/slice";
+import { removeAllItems, selectCart } from "../redux/cart/slice";
 
 export const Cart = () => {
-  const { items, totalPrice, totalCount } = useSelector((state) => state.cart);
+  const { items, totalPrice, totalCount } = useSelector(selectCart);
   const dispatch = useDispatch();
 
   const onRemoveAllItems = () => {

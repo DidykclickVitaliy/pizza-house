@@ -24,12 +24,23 @@ export const filterSlice = createSlice({
       state.searchValue = action.payload;
     },
     setFilters(state, action) {
+      // if (Object.keys(action.payload).length) {
+      //   state.sort = action.payload.sort;
+      //   state.categoryId = Number(action.payload.categoryId);
+      //   state.currentPage = Number(action.payload.currentPage);
+      // } else {
+      //   state.categoryId = 0;
+      //   state.currentPage =1;
+      //  state.sort = { name: "popularity (DESC)", sortProperty: "rating" },
+      // }
       state.sort = action.payload.sort;
       state.categoryId = Number(action.payload.categoryId);
       state.currentPage = Number(action.payload.currentPage);
     },
   },
 });
+
+export const selectFilter = (state) => state.filter;
 
 export const {
   setCategoryId,

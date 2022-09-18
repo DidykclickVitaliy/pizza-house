@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import pizzaLogo from "../../assets/img/pizza-logo.svg";
-import { Search } from "../Search";
+import { Search } from "./Search";
+import { selectCart } from "../redux/cart/slice";
 
-export const Header = () => {
-  const { totalPrice, totalCount } = useSelector((state) => state.cart);
+export const Header: React.FC = () => {
+  const { totalPrice, totalCount } = useSelector(selectCart);
+  const location = useLocation();
 
   return (
     <div className="header">
@@ -20,7 +23,7 @@ export const Header = () => {
           </div>
         </Link>
 
-        <Search />
+        {location.pathname === "/" && <Search />}
 
         <div className="header__cart">
           <Link to="/cart">

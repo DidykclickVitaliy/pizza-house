@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { setCategoryId } from "../../redux/filter/slice";
+import { setCategoryId } from "../redux/filter/slice";
 
 const categories = ["All", "Meaty", "Vegetarian", "Grill", "Spicy", "Closed"];
 

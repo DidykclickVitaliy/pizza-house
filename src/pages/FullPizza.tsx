@@ -2,11 +2,11 @@ import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-// interface Pizza {
-//   imageUrl: string;
-//   title: string;
-//   price: number;
-// }
+type PizzaItem = {
+  imageUrl: string;
+  title: string;
+  price: number;
+};
 
 export const FullPizza: React.FC = () => {
   // const [pizza, setPizza] = React.useState<{
@@ -14,11 +14,7 @@ export const FullPizza: React.FC = () => {
   //   title: string;
   //   price: number;
   // }>({ imageUrl: "", title: "", price: 0 });
-  const [pizza, setPizza] = React.useState<{
-    imageUrl: string;
-    title: string;
-    price: number;
-  }>();
+  const [pizza, setPizza] = React.useState<PizzaItem>();
   const { id } = useParams();
   const navigate = useNavigate();
 

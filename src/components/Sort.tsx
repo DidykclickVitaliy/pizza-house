@@ -1,9 +1,21 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { setSort } from "../redux/filter/slice";
+import { setSort, SortType } from "../redux/filter/slice";
 
-export const sortTypes = [
+type SortItem = {
+  name: string;
+  sortProperty: string;
+};
+
+type SortProps = {
+  value: {
+    name: string;
+    sortProperty: string;
+  };
+};
+
+export const sortTypes: SortItem[] = [
   { name: "popularity (DESC)", sortProperty: "rating" },
   { name: "popularity (ASC) ", sortProperty: "-rating" },
   { name: "price (DESC)", sortProperty: "price" },
@@ -12,15 +24,19 @@ export const sortTypes = [
   { name: "alphabet (ASC) ", sortProperty: "-title" },
 ];
 
-export const Sort = ({ value }) => {
+export const Sort: React.FC<SortProps> = ({ value }) => {
   const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = React.useState(false);
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.path.includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      // const _event = event as MouseEvent & {
+      //   path: Node[]
+      // }
+      // if (!event.composedPath().includes(sortRef.current as EventTarget)) {}
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setIsVisible(false);
       }
     };
@@ -32,8 +48,8 @@ export const Sort = ({ value }) => {
     };
   }, []);
 
-  const onClickSortType = (obj) => {
-    dispatch(setSort(obj));
+  const onClickSortType = (obj: SortItem) => {
+    dispatch(setSort(obj as SortType));
     setIsVisible(false);
   };
 

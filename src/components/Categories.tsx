@@ -3,9 +3,21 @@ import { useDispatch } from "react-redux";
 
 import { setCategoryId } from "../redux/filter/slice";
 
-const categories = ["All", "Meaty", "Vegetarian", "Grill", "Spicy", "Closed"];
+type CategoriesProps = {
+  value: number;
+  // onChangeCateogry: (id: number) => void
+};
 
-export const Categories = ({ value }) => {
+const categories: string[] = [
+  "All",
+  "Meaty",
+  "Vegetarian",
+  "Grill",
+  "Spicy",
+  "Closed",
+];
+
+export const Categories: React.FC<CategoriesProps> = ({ value }) => {
   const dispatch = useDispatch();
 
   return (

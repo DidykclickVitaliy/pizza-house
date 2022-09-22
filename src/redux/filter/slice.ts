@@ -8,7 +8,7 @@ const initialState: FilterSliceState = {
   searchValue: "",
   sort: {
     name: "popularity (DESC)",
-    sortProperty: SortPropertiesEnum.RATING_DESK,
+    sortProperty: SortPropertiesEnum.RATING_DESC,
   },
 };
 
@@ -29,18 +29,18 @@ export const filterSlice = createSlice({
       state.searchValue = action.payload;
     },
     setFilters(state, action: PayloadAction<FilterSliceState>) {
-      // if (Object.keys(action.payload).length) {
-      //   state.sort = action.payload.sort;
-      //   state.categoryId = Number(action.payload.categoryId);
-      //   state.currentPage = Number(action.payload.currentPage);
-      // } else {
-      //   state.categoryId = 0;
-      //   state.currentPage =1;
-      //  state.sort = { name: "popularity (DESC)", sortProperty: "rating" },
-      // }
-      state.sort = action.payload.sort;
-      state.categoryId = Number(action.payload.categoryId);
-      state.currentPage = Number(action.payload.currentPage);
+      if (Object.keys(action.payload).length) {
+        state.sort = action.payload.sort;
+        state.categoryId = Number(action.payload.categoryId);
+        state.currentPage = Number(action.payload.currentPage);
+      } else {
+        state.categoryId = 0;
+        state.currentPage = 1;
+        state.sort = {
+          name: "popularity (DESC)",
+          sortProperty: SortPropertiesEnum.RATING_DESC,
+        };
+      }
     },
   },
 });

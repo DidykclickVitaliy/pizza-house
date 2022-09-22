@@ -6,7 +6,6 @@ import { setCategoryId } from "../redux/filter/slice";
 
 type CategoriesProps = {
   value: number;
-  // onChangeCateogry: (id: number) => void  if this anonym function in props
 };
 
 const categories: string[] = [
@@ -44,5 +43,4 @@ export const Categories: React.FC<CategoriesProps> = React.memo(({ value }) => {
       </ul>
     </div>
   );
-  // 4 urok 56:58
 });

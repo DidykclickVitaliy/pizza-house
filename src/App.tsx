@@ -19,11 +19,6 @@ const FullPizza = React.lazy(() =>
   )
 );
 
-// const Cart = Loadable({
-//   loader: () => import("./pages/Cart"),
-//   loading: () => <div>Loading...</div>,
-// }); For SSR
-
 function App() {
   return (
     <Routes>

@@ -27,9 +27,6 @@ export const Search: React.FC = () => {
     dispatch(setSearchValue(""));
 
     inputRef.current?.focus();
-    // if (inputRef.current) {
-    //   inputRef.current.focus();
-    // }
   };
 
   return (

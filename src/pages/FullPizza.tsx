@@ -9,11 +9,6 @@ type PizzaItem = {
 };
 
 export const FullPizza: React.FC = () => {
-  // const [pizza, setPizza] = React.useState<{
-  //   imageUrl: string;
-  //   title: string;
-  //   price: number;
-  // }>({ imageUrl: "", title: "", price: 0 });
   const [pizza, setPizza] = React.useState<PizzaItem>();
   const { id } = useParams();
   const navigate = useNavigate();

@@ -3,6 +3,8 @@ import axios from "axios";
 
 import { PizzaItem } from "./types";
 
+//    signal abortController to terminate the request when receiving new pizzas
+
 export const fetchPizzas = createAsyncThunk<
   PizzaItem[],
   Record<string, string>
@@ -11,15 +13,6 @@ export const fetchPizzas = createAsyncThunk<
   const { data } = await axios.get<PizzaItem[]>(
     `https://6304c03394b8c58fd7244553.mockapi.io/items?${page}&${category}&sortBy=${sortBy}&order=${order}${search}`
   );
-  // if (data.length === 0) {
-  //   thunkAPI.rejectWithValue("Cannot get pizza");
-  // }
-
-  // return thunkAPI.fulfillWithValue(data);
-
-  // thunkAPI.getState()
 
   return data;
 });
-
-// Pizza block button to component

@@ -18,8 +18,6 @@ import { selectFilter } from "../redux/filter/selectors";
 import { SortType } from "../redux/filter/types";
 import { fetchPizzas } from "../redux/pizza/asyncActions";
 
-// #19: 🍕 React Pizza v2
-
 export const Home: React.FC = () => {
   const { categoryId, sort, currentPage, searchValue } =
     useSelector(selectFilter);
@@ -29,16 +27,8 @@ export const Home: React.FC = () => {
 
   const isSearchRef = React.useRef(false);
   const isMountedRef = React.useRef(false);
-  // const [items, setItems] = React.useState([]);
-  // const [isLoading, setIsLoading] = React.useState(true);
-  // const [currentPage, setCurrentPage] = React.useState(1);
-  // const [sort, setSortType] = React.useState({
-  //   name: "popularity (DESC)",
-  //   sortProperty: "rating",
-  // });
-  //do to click on svg and change desc asc 9 lesson comms
 
-  // Если изменили параметры и был первый рендер
+  //If the parameters were changed and there was a first render
   React.useEffect(() => {
     if (isMountedRef.current) {
       const queryString = qs.stringify(
@@ -57,10 +47,10 @@ export const Home: React.FC = () => {
     isMountedRef.current = true;
   }, [categoryId, sort.sortProperty, currentPage, searchValue]);
 
-  // Если был первый рендер, то проверяем УРЛ-параметры и сохраняем в редаксе
+  // If there was a first render, then we check the URL parameters and save it in the redux
   React.useEffect(() => {
     if (window.location.search) {
-      // #24: 🍕 React Pizza v2
+      // #24
       // const params = qs.parse(window.location.search.substring(1));
 
       // const sort = sortTypes.find(
@@ -80,9 +70,8 @@ export const Home: React.FC = () => {
     }
   }, []);
 
-  // Если был первый рендер, то запрашиваем пиццы
+  //If there was a first render, then we request pizzas
   React.useEffect(() => {
-    // setIsLoading(true);
     window.scrollTo(0, 0);
 
     function getPizzas() {
@@ -101,11 +90,6 @@ export const Home: React.FC = () => {
           search,
         })
       );
-      // try {
-      //   await dispatch(fetchPizzas({ page, category, sortBy, order, search }));
-      // } catch (error) {
-      //   console.log("Cannot fetch pizzas".error);
-      // }
     }
 
     if (!isSearchRef.current) {
@@ -115,7 +99,6 @@ export const Home: React.FC = () => {
     isSearchRef.current = false;
   }, [categoryId, sort, currentPage, searchValue]);
 
-  // const filterItems = (item) => {
   //   const filteredItems = item.filter((obj) =>
   //     obj.title.toLowerCase().includes(searchValue.toLowerCase())
   //   );

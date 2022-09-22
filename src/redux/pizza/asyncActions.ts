@@ -21,3 +21,5 @@ export const fetchPizzas = createAsyncThunk<
 
   return data;
 });
+
+// Pizza block button to component

@@ -173,6 +173,25 @@ body {
       width: 13%;
 
       &-minus {
+        &:disabled {
+          opacity: 0.4;
+          border-color: #787878;
+
+          cursor: inherit;
+
+          svg path {
+            fill: #787878;
+          }
+
+          &:active {
+            background: #fff;
+            transform: none;
+          }
+
+          &:hover {
+            background: transparent;
+          }
+        }
         svg {
           path:first-of-type {
             display: none;

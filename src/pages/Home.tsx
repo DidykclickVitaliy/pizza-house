@@ -8,9 +8,12 @@ import { Skeleton } from "../components/PizzaBlock/Skeleton";
 import { Categories } from "../components/Categories";
 import { Sort } from "../components/Sort";
 import { Pagination } from "../components/Pagination";
-import { selectFilter, setFilters, SortType } from "../redux/filter/slice";
-import { fetchPizzas, selectPizza } from "../redux/pizza/slice";
+import { setFilters } from "../redux/filter/slice";
+import { selectPizza } from "../redux/pizza/selectors";
 import { useAppDispatch } from "../redux/store";
+import { selectFilter } from "../redux/filter/selectors";
+import { SortType } from "../redux/filter/types";
+import { fetchPizzas } from "../redux/pizza/asyncActions";
 
 // #19: 🍕 React Pizza v2
 

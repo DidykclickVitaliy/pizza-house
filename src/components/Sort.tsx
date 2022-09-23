@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { setSort, SortType } from "../redux/filter/slice";
+import { setSort } from "../redux/filter/slice";
+import { SortType } from "../redux/filter/types";
 
 type SortItem = {
   name: string;
@@ -9,10 +10,7 @@ type SortItem = {
 };
 
 type SortProps = {
-  value: {
-    name: string;
-    sortProperty: string;
-  };
+  value: SortType;
 };
 
 export const sortTypes: SortItem[] = [
@@ -24,7 +22,7 @@ export const sortTypes: SortItem[] = [
   { name: "alphabet (ASC) ", sortProperty: "-title" },
 ];
 
-export const Sort: React.FC<SortProps> = ({ value }) => {
+export const Sort: React.FC<SortProps> = React.memo(({ value }) => {
   const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = React.useState(false);
@@ -93,4 +91,4 @@ export const Sort: React.FC<SortProps> = ({ value }) => {
       </div>
     </div>
   );
-};
+});

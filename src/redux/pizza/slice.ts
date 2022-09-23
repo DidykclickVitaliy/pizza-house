@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { RootState } from "../store";
+import { fetchPizzas } from "./asyncActions";
+import { PizzaSliceState, StatusEnum } from "./types";
 // #18: 🍕 React Pizza v2  signal abortController для обрыва запроса при получении новых пицц
 
 // type FetchPizzasArgs = {
@@ -32,49 +32,10 @@ import { RootState } from "../store";
 //   }
 // );
 
-type PizzaItem = {
-  id: string;
-  imageUrl: string;
-  title: string;
-  price: number;
-  types: number[];
-  sizes: number[];
-};
-
-export enum Status {
-  LOADIND = "loading",
-  SUCCESS = "success",
-  REJECTED = "rejected",
-}
-
-export interface PizzaSliceState {
-  items: PizzaItem[];
-  status: Status;
-}
-
 const initialState: PizzaSliceState = {
   items: [],
-  status: Status.LOADIND,
+  status: StatusEnum.LOADIND,
 };
-
-export const fetchPizzas = createAsyncThunk<
-  PizzaItem[],
-  Record<string, string>
->("pizza/fetchPizzaStatus", async (params) => {
-  const { page, category, sortBy, order, search } = params;
-  const { data } = await axios.get<PizzaItem[]>(
-    `https://6304c03394b8c58fd7244553.mockapi.io/items?${page}&${category}&sortBy=${sortBy}&order=${order}${search}`
-  );
-  // if (data.length === 0) {
-  //   thunkAPI.rejectWithValue("Cannot get pizza");
-  // }
-
-  // return thunkAPI.fulfillWithValue(data);
-
-  // thunkAPI.getState()
-
-  return data;
-});
 
 const pizzaSlice = createSlice({
   name: "pizza",
@@ -82,15 +43,15 @@ const pizzaSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPizzas.pending, (state) => {
-      state.status = Status.LOADIND;
+      state.status = StatusEnum.LOADIND;
       state.items = [];
     });
     builder.addCase(fetchPizzas.fulfilled, (state, action) => {
       state.items = action.payload;
-      state.status = Status.SUCCESS;
+      state.status = StatusEnum.SUCCESS;
     });
     builder.addCase(fetchPizzas.rejected, (state) => {
-      state.status = Status.REJECTED;
+      state.status = StatusEnum.REJECTED;
       state.items = [];
     });
   },
@@ -110,7 +71,5 @@ const pizzaSlice = createSlice({
   //   },
   // },  JS
 });
-
-export const selectPizza = (state: RootState) => state.pizza;
 
 export default pizzaSlice.reducer;

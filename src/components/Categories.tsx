@@ -1,3 +1,4 @@
+import { useWhyDidYouUpdate } from "ahooks";
 import React from "react";
 import { useDispatch } from "react-redux";
 
@@ -5,7 +6,7 @@ import { setCategoryId } from "../redux/filter/slice";
 
 type CategoriesProps = {
   value: number;
-  // onChangeCateogry: (id: number) => void
+  // onChangeCateogry: (id: number) => void  if this anonym function in props
 };
 
 const categories: string[] = [
@@ -17,8 +18,14 @@ const categories: string[] = [
   "Closed",
 ];
 
-export const Categories: React.FC<CategoriesProps> = ({ value }) => {
+export const Categories: React.FC<CategoriesProps> = React.memo(({ value }) => {
   const dispatch = useDispatch();
+
+  const onChangeCateogry = React.useCallback((index: number) => {
+    dispatch(setCategoryId(index));
+  }, []);
+
+  useWhyDidYouUpdate("Categories", { value, onChangeCateogry });
 
   return (
     <div className="categories">
@@ -28,7 +35,7 @@ export const Categories: React.FC<CategoriesProps> = ({ value }) => {
             <li
               key={index}
               className={value === index ? "active" : ""}
-              onClick={() => dispatch(setCategoryId(index))}
+              onClick={() => onChangeCateogry(index)}
             >
               {category}
             </li>
@@ -38,4 +45,4 @@ export const Categories: React.FC<CategoriesProps> = ({ value }) => {
     </div>
   );
   // 4 urok 56:58
-};
+});

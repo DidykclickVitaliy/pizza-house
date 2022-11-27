@@ -2,7 +2,7 @@
 
  # Pizza house on React.
  
- # 👀 In this project, the topic of creating the front-end part of a pizzeria online store was revealed using all the technologies listed below.
+ #  In this project, the topic of creating the front-end part of a pizzeria online store was revealed using all the technologies listed below.
  
  # 🔥 Features
 - Component approach, sorting, searching, pagination, filtering, popups, etc.

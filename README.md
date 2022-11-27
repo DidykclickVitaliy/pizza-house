@@ -19,7 +19,7 @@
 - **TypeScript**
 - **Redux Toolkit**
 - **React Router v6** 
-- **Axios + Fetch API** 
+- **Axios(Async thunk)** 
 - **React Hooks** 
 - **Prettier** 
 - **CSS-Modules / SCSS**

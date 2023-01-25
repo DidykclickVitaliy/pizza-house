@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+
+import { instance } from "../middleware/axios";
 
 type PizzaItem = {
   imageUrl: string;
@@ -16,9 +17,7 @@ export const FullPizza: React.FC = () => {
   React.useEffect(() => {
     const fetchPizza = async () => {
       try {
-        const { data } = await axios.get(
-          "https://6304c03394b8c58fd7244553.mockapi.io/items/" + id
-        );
+        const { data } = await instance.get("items" + id);
 
         setPizza(data);
       } catch (error) {

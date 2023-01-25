@@ -20,6 +20,7 @@ const FullPizza = React.lazy(() =>
 );
 
 function App() {
+  console.log(process.env.REACT_APP_API_URL);
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

@@ -50,6 +50,7 @@ export const Home: React.FC = () => {
   // If there was a first render, then we check the URL parameters and save it in the redux
   React.useEffect(() => {
     if (window.location.search) {
+      // useLocation
       // #24
       // const params = qs.parse(window.location.search.substring(1));
 
@@ -81,15 +82,7 @@ export const Home: React.FC = () => {
       const order = sort.sortProperty.includes("-") ? "asc" : "desc";
       const search = searchValue ? `&search=${searchValue}` : "";
 
-      dispatch(
-        fetchPizzas({
-          page,
-          category,
-          sortBy,
-          order,
-          search,
-        })
-      );
+      dispatch(fetchPizzas({ page, category, sortBy, order, search }));
     }
 
     if (!isSearchRef.current) {
